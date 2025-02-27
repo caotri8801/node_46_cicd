@@ -51,7 +51,7 @@
  * 
  * HUB:
  *    - docker login
- *    - docker push name_container:tag
+ *    - docker push name_image:tag
  * 
  * cách cài ubuntu trên linux:
  * https://docs.docker.com/engine/install/ubuntu/

@@ -1,0 +1,32 @@
+name: CD-DOCKER
+
+on: 
+    workflow_run:
+        workflows: ["CI-DOCKER"]
+        types:
+            - completed
+
+jobs:
+    build:
+        runs-on: node_46
+        steps:
+            - name: Xóa File .env cũ
+              run: sudo rm -f .env
+            - name: Tạo file .env mới
+              run: |
+                 echo "DATABASE_URL=${{secrets.DATABASE_URL}}" >> .env
+                 echo "ACCESS_TOKEN_SECRET=${{secrets.ACCESS_TOKEN_SECRET}}" >> .env
+                 echo "ACCESS_TOKEN_EXPIRED=${{secrets.ACCESS_TOKEN_EXPIRED}}" >> .env
+                 echo "REFRESH_TOKEN_SECRET=${{secrets.REFRESH_TOKEN_SECRET}}" >> .env
+                 echo "REFRESH_TOKEN_EXPIRED=${{secrets.REFRESH_TOKEN_EXPIRED}}" >> .env
+            - name: Dừng container đang chạy
+              run: sudo docker container stop const-mysql_cyber_media || true
+
+            - name: Xóa container
+              run: sudo docker container remove const-mysql_cyber_media || true
+
+            - name: xóa image cũ
+              run: sudo docker image remove caotri8801/image-be_cyber_media:latest || true
+
+            - name: chạy lại docker compose
+              run: sudo docker compose up -d

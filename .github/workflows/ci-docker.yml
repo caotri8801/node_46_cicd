@@ -1,0 +1,18 @@
+name: CI-DOCKER
+
+on:
+    push:
+        branches: ["main"]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: action/checkout@v4
+
+            - name: Đăng nhập vào docker hub
+              run: docker login -u caotri8801 -p ${{secrets.PASS_DOCKER}}
+            - name: Build image mới
+              run: docker build -t caotri8801/image-be_cyber_media:latest .
+            - name: Push Image lên docker Hub
+              run: docker push caotri8801/image-be_cyber_media:latest

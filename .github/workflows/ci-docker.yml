@@ -8,7 +8,7 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - uses: action/checkout@v4
+            - uses: actions/checkout@v4
 
             - name: Đăng nhập vào docker hub
               run: docker login -u caotri8801 -p ${{secrets.PASS_DOCKER}}

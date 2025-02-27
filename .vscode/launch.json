@@ -1,0 +1,20 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+            "type": "node", //chạy với node
+            "request": "launch", //khi start 1 cái debug nó sẽ khởi tạo 1 cái terminal mới
+            "name": "BE Cyber Media",
+            "skipFiles": [
+                "<node_internals>/**" 
+            ], //Bỏ qua những file ... function lõi của nodeJs
+            "program": "${workspaceFolder}\\server.js", //chỉ định file server.js (tìm tới file đầu tiên để chạy)
+            "runtimeExecutable": "nodemon", //start dự án lên với 1 thư viện
+            "console": "integratedTerminal" //vị trí để log ra (integratedTerminal -> hiển thị bên trong "debug console")
+        }
+    ]
+}
